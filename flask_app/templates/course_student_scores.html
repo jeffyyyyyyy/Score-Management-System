@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Student Scores</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='DeviconSqldeveloper.png') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateScore(course_id, student_id) {
+            var score = $('#score-' + student_id).val();
+            $.ajax({
+                url: "{{ url_for('update_score') }}",
+                type: 'POST',
+                data: {
+                    course_id: course_id,
+                    student_id: student_id,
+                    score: score
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        alert('Score updated successfully');
+                    } else {
+                        alert('Failed to update score');
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>课程号{{ course_id }}-班级学生成绩</h2>
+        <table class="info-table">
+            <tr>
+                <th>学号Student ID</th>
+                <th>姓名</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+            {% for score in student_scores %}
+            <tr>
+                <td>{{ score.StudentID }}</td>
+                <td>{{ score.StudentName }}</td>
+                <td>
+                    <input type="number" id="score-{{ score.StudentID }}" name="score" value="{{ score.Score }}" required>
+                </td>
+                <td>
+                    <button type="button" class="btn" onclick="updateScore('{{ course_id }}', '{{ score.StudentID }}')">保存更改</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+        <form action="{{ url_for('teacher.teacher_dashboard') }}" method="get">
+            <button type="submit" class="btn">返回</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>成绩管理-学生面板</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='DeviconSqldeveloper.png') }}">
+    <script>
+        function submitForm() {
+            document.getElementById('termForm').submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, {{ student_info.StudentName }}</h1>
+
+        <h2>学生个人信息</h2>
+        <table class="info-table">
+            <tr>
+                <th>学号</th>
+                <td>{{ student_info.StudentID }}</td>
+            </tr>
+            <tr>
+                <th>姓名</th>
+                <td>{{ student_info.StudentName }}</td>
+            </tr>
+            <tr>
+                <th>性别</th>
+                <td>{{ student_info.StudentSex }}</td>
+            </tr>
+            <tr>
+                <th>生日</th>
+                <td>{{ student_info.StudentBirthday }}</td>
+            </tr>
+            <tr>
+                <th>院系</th>
+                <td>{{ student_info.StudentDepartment }}</td>
+            <tr>
+                <th>班级</th>
+                <td>{{ student_info.Class }}</td>
+            </tr>
+            </tr>
+        </table>
+        <form action="{{ url_for('common.logout') }}" method="get">
+            <button type="submit" class="btn">退出登录</button>
+        </form>
+
+        <h2>已修课程成绩查询</h2>
+        <div class="formcontainer">
+            <form id="termForm" action="{{ url_for('student.student_dashboard') }}" method="post">
+                <div class="formgruop">
+                    <label for="term">查询学期:</label>
+                    <select id="term" name="term" onchange="submitForm()" style="flex: 1;padding: 8px;border: 1px solid #ccc;border-radius: 4px;">
+                        <option value="">选择学期</option>
+                        <option value="All" {% if selected_term == 'All' %}selected{% endif %}>入学以来</option>
+                        {% for term in terms %}
+                        <option value="{{ term.Term }}" {% if selected_term == term.Term %}selected{% endif %}>{{ term.Term }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+            {% if student_scores %}
+            <h4>你选择的学期: {{ selected_term }}</h4>
+            <table class="info-table">
+                <tr>
+                    <th>课程号<br>Course ID</th>
+                    <th>课程名称</th>
+                    <th>成绩</th>
+                    <th>学分</th>
+                    <th>学期</th>
+                </tr>
+                {% for score in student_scores %}
+                <tr>
+                    <td>{{ score.CourseID }}</td>
+                    <td>{{ score.CourseName }}</td>
+                    <td>{{ score.Score }}</td>
+                    <td>{{ score.Point }}</td>
+                    <td>{{ score.Term }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+        <h2>个人加权成绩</h2>
+        <table class="info-table">
+            <tr>
+                <th>个人加权总绩点</th>
+                <td>{{ weighted_gpa }}</td>
+            </tr>
+            <tr>
+                <th>个人加权总平均分</th>
+                <td>{{ weighted_avg_score }}</td>
+            </tr>
+        </table>
+        <h2>更改密码</h2>
+        <div class="formcontainer">
+            <form action="/change_password" method="post">
+                <div class="formgruop">
+                    <label for="new_password">新密码:</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                </div>
+                <button type="submit" class="btn">更改密码</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

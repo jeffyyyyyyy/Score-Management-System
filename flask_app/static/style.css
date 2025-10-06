@@ -1,0 +1,210 @@
+/* body{
+    background:blue;
+    padding:1%
+}
+ 
+.logout{
+    float:right;
+    color: #ffffff;
+} */
+/* styles.css */
+
+/* 全局样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(-45deg, #56ab2f, #a8e063, #3f4c6b, #3ca55c); /* 动态渐变背景色 */
+    background-size: 400% 400%;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    animation: gradientBG 15s ease infinite;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    max-height: 80vh; /* 限制容器的最大高度为视窗高度的80% */
+    overflow-y: auto; /* 允许垂直滚动 */
+    padding: 20px; /* 添加一些内边距 */
+    border: 1px solid #ccc; /* 添加边框 */
+    margin-bottom: 20px; /* 添加一些底部外边距 */
+}
+.admin_container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 90%;
+    height: 90%;
+    max-width: 1600px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    max-height: 80vh; /* 限制容器的最大高度为视窗高度的80% */
+    overflow-y: auto; /* 允许垂直滚动 */
+    padding: 20px; /* 添加一些内边距 */
+    border: 1px solid #ccc; /* 添加边框 */
+    margin-bottom: 20px; /* 添加一些底部外边距 */
+}
+.boxcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px;
+}
+.box {
+    min-width: 400px; /* 确保在小屏幕上容器不会太窄 */
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    flex:1;
+}
+h1, h3 {
+    margin: 20px 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #2f80ed;
+    animation: colorChange 5s infinite;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 1.2em;
+    color: #333;
+}
+/*表格样式*/
+.formcontainer {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.formgruop{/*group拼错了，当防伪标志了hhh*/
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    align-items: center;
+}
+form label {
+    width: 100px;
+    font-weight: bold;
+}
+form input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 按钮样式 */
+.btn {
+    background-color: #3ca55c;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #56ab2f;
+    transform: scale(1.05);
+}
+
+.alert {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    transition: opacity 0.5s ease;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.info-table th, .info-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.info-table th {
+    background-color: #f2f2f2;
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination li {
+    display: inline;
+}
+.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+.pagination li a:hover:not(.active) {background-color: #ddd;}
+/* 动效 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes colorChange {
+    0%, 100% {
+        color: #2f80ed;
+    }
+    50% {
+        color: #56ab2f;
+    }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='DeviconSqldeveloper.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 style="margin-bottom: 0px; padding-bottom: 0px;">Login</h1>
+        <p style="color: #2f80ed;animation: colorChange 5s infinite;">成绩管理系统</p>
+        <form action="/login" method="post">
+            <div class="formgruop">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="formgruop">
+                <label for="password">  Password :</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='DeviconSqldeveloper.png') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>课程学生成绩表</h2>
+        <table class="info-table">
+            <tr>
+                <th>课程号<br>CourseID</th>
+                <th>学号<br>StudentID</th>
+                <th>成绩</th>
+                <th>学分</th>
+                <th>学期</th>
+            </tr>
+            {% for score in scores %}
+            <tr>
+                <td>{{ score.CourseID }}</td>
+                <td>{{ score.StudentID }}</td>
+                <td>{{ score.Score }}</td>
+                <td>{{ score.Point }}</td>
+                <td>{{ score.Term }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li><a href="{{ url_for('admin.scores_page', page=page-1) }}">&laquo;</a></li>
+            {% endif %}
+            {% for p in range(1, total_pages + 1) %}
+            <li><a href="{{ url_for('admin.scores_page', page=p) }}" class="{% if p == page %}active{% endif %}">{{ p }}</a></li>
+            {% endfor %}
+            {% if page < total_pages %}
+            <li><a href="{{ url_for('admin.scores_page', page=page+1) }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+        <form action="{{ url_for('admin.admin_dashboard') }}" method="get">
+            <button type="submit" class="btn">返回</button>
+        </form>
+    </div>
+</body>
+</html>

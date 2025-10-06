@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>成绩管理-管理员面板</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='DeviconSqldeveloper.png') }}">s
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="admin_container" >
+        <h1>Hello,管理员</h1>
+        <form action="{{ url_for('common.logout') }}" method="get">
+            <button type="submit" class="btn">退出登录</button>
+        </form>
+        <div class="boxcontainer">            
+            <div class="box">
+                <h2>课程信息表管理</h2>
+                <a class="btn" href="{{ url_for('admin.courses_page') }}">课程信息表</a>
+                <h3>添加课程信息</h3>
+                <div class="formcontainer">
+                    <form action="/add_course" method="post">
+                        <div class="formgruop">
+                            <label for="course_name">课程名:</label>
+                            <input type="text" id="course_name" name="course_name" required>
+                        </div>
+                        <div class="formgruop">
+                            <label for="point">学分:</label>
+                            <input type="number" step="0.1" id="point" name="point" required>
+                        </div>
+                        <div class="formgruop">
+                            <label for="term">学期:</label>
+                            <input type="text" id="term" name="term" required>
+                        </div>
+                        <div class="formgruop">
+                            <label for="stu_number">学生人数:</label>
+                            <input type="number" id="stu_number" name="stu_number" required>
+                        </div>
+                        <button type="submit" class="btn">添加课程</button>
+                    </form>
+                </div>
+                <h3>更改课程信息</h3>
+                <div class="formcontainer">
+                    <form action="/get_course" method="post">
+                        <div class="formgruop">
+                            <label for="course_id">课程号<br>Course ID:</label>
+                            <input type="text" id="course_id" name="course_id" required>
+                        </div>
+                        <button type="submit" class="btn">查询</button>
+                    </form>
+                    {% if course %}
+                    <form action="/update_course" method="post">
+                        <div class="formgruop">
+                            <input type="hidden" id="course_id" name="course_id" value="{{ course.CourseID }}">   
+                        </div><div class="formgruop">
+                            <label for="course_name">课程名称:</label>
+                            <input type="text" id="course_name" name="course_name" value="{{ course.CourseName }}" required>
+                        </div><div class="formgruop">
+                            <label for="point">学分:</label>
+                            <input type="number" step="0.1" id="point" name="point" value="{{ course.Point }}" required>
+                        </div><div class="formgruop">
+                            <label for="term">学期:</label>
+                            <input type="text" id="term" name="term" value="{{ course.Term }}" required>
+                        </div><div class="formgruop">
+                            <label for="stu_number">学生人数:</label>
+                            <input type="number" id="stu_number" name="stu_number" value="{{ course.StuNumber }}" required>
+                        </div>
+                        <button type="submit" class="btn">更改</button>
+                    </form>
+                    {% endif %}
+                </div>
+                <h3>删除课程信息</h3>
+                <div class="formcontainer">
+                    <form action="/delete_course" method="post">
+                        <div class="formgruop">
+                            <label for="course_id">课程号<br>Course ID:</label>
+                            <input type="text" id="course_id" name="course_id" required>
+                        </div>
+                        <button type="submit" class="btn">删除</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="box">
+                <h2>教工信息表管理</h2>
+                <a class="btn" href="{{ url_for('admin.teachers_page') }}">教工信息表</a>
+                <h3>添加教工信息</h3>
+                <div class="formcontainer">
+                    <form action="/add_teacher" method="post">
+                        <div class="formgruop">
+                            <label for="teacher_name">姓名:</label>
+                            <input type="text" id="teacher_name" name="teacher_name" required>
+                        </div><div class="formgruop">
+                            <label for="teacher_sex">性别:</label>
+                            <input type="text" id="teacher_sex" name="teacher_sex" required>
+                        </div><div class="formgruop">
+                            <label for="teacher_birthday">生日:</label>
+                            <input type="date" id="teacher_birthday" name="teacher_birthday" required>
+                        </div><div class="formgruop">
+                            <label for="teacher_department">院系:</label>
+                            <input type="text" id="teacher_department" name="teacher_department" required>
+                        </div><div class="formgruop">
+                            <label for="position">职务:</label>
+                            <input type="text" id="position" name="position" required>
+                        </div>
+                        <button type="submit" class="btn">添加</button>
+                    </form>
+                </div>
+                <h3>更改教工信息</h3>
+                <div class="formcontainer">
+                    <form action="/get_teacher" method="post">
+                        <div class="formgruop">
+                            <label for="teacher_id">教工号Teacher ID:</label>
+                            <input type="text" id="teacher_id" name="teacher_id" required>
+                        </div>
+                        <button type="submit" class="btn">查询</button>
+                    </form>
+                    {% if teacher %}
+                    <form action="/update_teacher" method="post">
+                        <div class="formgruop">
+                            <input type="hidden" id="teacher_id" name="teacher_id" value="{{ teacher.TeacherID }}">
+                        </div><div class="formgruop">
+                            <label for="teacher_name">姓名:</label>
+                            <input type="text" id="teacher_name" name="teacher_name" value="{{ teacher.TeacherName }}" required>
+                        </div><div class="formgruop">
+                            <label for="teacher_sex">性别:</label>
+                            <input type="text" id="teacher_sex" name="teacher_sex" value="{{ teacher.TeacherSex }}" required>
+                        </div><div class="formgruop">
+                            <label for="teacher_birthday">生日:</label>
+                            <input type="date" id="teacher_birthday" name="teacher_birthday" value="{{ teacher.TeacherBirthday }}" required>
+                        </div><div class="formgruop">
+                            <label for="teacher_department">院系:</label>
+                            <input type="text" id="teacher_department" name="teacher_department" value="{{ teacher.TeacherDepartment }}" required>
+                        </div><div class="formgruop">
+                            <label for="position">职务:</label>
+                            <input type="text" id="position" name="position" value="{{ teacher.Position }}" required>
+                        </div>
+                        <button type="submit" class="btn">更改</button>
+                    </form>
+                    {% endif %}
+                </div>
+                <h3>删除教工信息</h3>
+                <div class="formcontainer">
+                    <form action="/delete_teacher" method="post">
+                        <div class="formgruop">
+                            <label for="teacher_id">教工号Teacher ID:</label>
+                            <input type="text" id="teacher_id" name="teacher_id" required>
+                        </div>
+                        <button type="submit" class="btn">删除</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="box">
+                <h2>学生信息表管理</h2>
+                <a class="btn" href="{{ url_for('admin.students_page') }}">学生信息表</a>
+                <h3>添加学生信息</h3>
+                <div class="formcontainer">
+                    <form action="/add_student" method="post">
+                    <div class="formgruop">
+                        <label for="student_name">姓名:</label>
+                        <input type="text" id="student_name" name="student_name" required>
+                    </div><div class="formgruop">
+                        <label for="student_sex">性别:</label>
+                        <input type="text" id="student_sex" name="student_sex" required>
+                    </div><div class="formgruop">
+                        <label for="student_birthday">生日:</label>
+                        <input type="date" id="student_birthday" name="student_birthday" required>
+                    </div><div class="formgruop">
+                        <label for="student_department">院系:</label>
+                        <input type="text" id="student_department" name="student_department" required>
+                    </div><div class="formgruop">
+                        <label for="class">班级:</label>
+                        <input type="text" id="class" name="class" required>
+                    </div>
+                        <button type="submit" class="btn">添加</button>
+                    </form>
+                </div>
+                <h3>更改学生信息</h3>
+                <div class="formcontainer">
+                    <form action="/get_student" method="post">
+                        <div class="formgruop">
+                            <label for="student_id">学号Student ID:</label>
+                            <input type="text" id="student_id" name="student_id" required>
+                        </div>
+                        <button type="submit" class="btn">查询</button>
+                    </form>
+                    {% if student %}
+                    <form action="/update_student" method="post">
+                    <div class="formgruop">
+                        <input type="hidden" id="student_id" name="student_id" value="{{ student.StudentID }}">
+                    </div><div class="formgruop">
+                        <label for="student_name">姓名:</label>
+                        <input type="text" id="student_name" name="student_name" value="{{ student.StudentName }}" required>
+                    </div><div class="formgruop">
+                        <label for="student_sex">性别:</label>
+                        <input type="text" id="student_sex" name="student_sex" value="{{ student.StudentSex }}" required>
+                    </div><div class="formgruop">
+                        <label for="student_birthday">生日:</label>
+                        <input type="date" id="student_birthday" name="student_birthday" value="{{ student.StudentBirthday }}" required>
+                    </div><div class="formgruop">
+                        <label for="student_department">院系:</label>
+                        <input type="text" id="student_department" name="student_department" value="{{ student.StudentDepartment }}" required>
+                    </div><div class="formgruop">
+                        <label for="class">班级:</label>
+                        <input type="text" id="class" name="class" value="{{ student.Class }}" required>
+                    </div>
+                        <button type="submit" class="btn">更改</button>
+                    </form>
+                    {% endif %}
+                </div>
+                <h3>删除学生信息</h3>
+                <div class="formcontainer">
+                    <form action="/delete_student" method="post">
+                        <div class="formgruop">
+                            <label for="student_id">学号Student ID:</label>
+                            <input type="text" id="student_id" name="student_id" required>
+                        </div>
+                        <button type="submit" class="btn">删除</button>
+                    </form>
+                </div>
+                
+            </div>
+            <div class="box">
+                <h2>授课信息与学生成绩管理</h2>
+                <a class="btn" href="{{ url_for('admin.scores_page') }}">课程学生成绩表</a>
+                <a class="btn" href="{{ url_for('admin.teachtable_page') }}">授课信息表</a>
+                <h3>添加教师授课信息</h3>
+                <div class="formcontainer">
+                    <form action="{{ url_for('admin.add_teach_record') }}" method="post">
+                        <div class="formgruop">
+                            <label for="teacher_id">教工号<br>Teacher ID:</label>
+                            <input type="text" id="teacher_id" name="teacher_id" required>
+                        </div><div class="formgruop">
+                            <label for="course_id">课程号<br>Course ID:</label>
+                            <input type="text" id="course_id" name="course_id" required>
+                        </div>
+                        <button type="submit" class="btn">添加</button>
+                    </form>
+                </div>
+                <h3>添加学生上课信息</h3>
+                <div class="formcontainer">
+                    <form action="{{ url_for('admin.admin_add_score_record') }}" method="post">
+                        <div class="formgruop">
+                            <label for="course_id">课程号<br>Course ID:</label>
+                            <input type="text" id="course_id" name="course_id" required>
+                        </div>
+                        <div class="formgruop">
+                            <label for="student_id">学号<br>StudentID:</label>
+                            <input type="text" id="student_id" name="student_id" required>
+                        </div>
+                        <button type="submit" class="btn">添加</button>
+                    </form>
+                </div>
+                    
+            </div>
+            <div class="box">
+                <h3>更改密码</h3>
+                <div class="formcontainer">
+                    <form action="/change_password" method="post">
+                        <div class="formgruop">
+                            <label for="new_password">新密码:</label>
+                            <input type="password" id="new_password" name="new_password" required>
+                        </div>
+                        <button type="submit" class="btn">更改密码</button>
+                    </form>
+                </div>
+                <h3>更改账号登录权限</h3>
+                <div class="formcontainer">
+                    <form action="/update_account_status" method="post">
+                        <div class="formgruop">
+                            <label for="user_id">教工号/学号:</label>
+                            <input type="text" id="user_id" name="user_id" required>
+                        </div><div class="formgruop">
+                            <label for="account_status">登陆权限:</label>
+                            <input type="number" id="account_status" name="account_status" placeholder="设置0为禁止,设置1为允许" required>
+                        </div>
+                            <button type="submit" class="btn">更改</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

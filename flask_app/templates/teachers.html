@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teachers</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='DeviconSqldeveloper.png') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Teachers</h2>
+        <table class="info-table">
+            <tr>
+                <th>TeacherID</th>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Birthday</th>
+                <th>Position</th>
+                <th>Department</th>
+            </tr>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.TeacherID }}</td>
+                <td>{{ teacher.TeacherName }}</td>
+                <td>{{ teacher.TeacherSex }}</td>
+                <td>{{ teacher.TeacherBirthday }}</td>
+                <td>{{ teacher.Position }}</td>
+                <td>{{ teacher.TeacherDepartment }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li><a href="{{ url_for('admin.teachers_page', page=page-1) }}">&laquo;</a></li>
+            {% endif %}
+            {% for p in range(1, total_pages + 1) %}
+            <li><a href="{{ url_for('admin.teachers_page', page=p) }}" class="{% if p == page %}active{% endif %}">{{ p }}</a></li>
+            {% endfor %}
+            {% if page < total_pages %}
+            <li><a href="{{ url_for('admin.teachers_page', page=page+1) }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+        <form action="{{ url_for('admin.admin_dashboard') }}" method="get">
+            <button type="submit" class="btn">返回</button>
+        </form>
+    </div>
+</body>
+</html>
