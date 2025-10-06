@@ -16,6 +16,7 @@
 - 业务逻辑层通过设计好的 SQL 存储过程、触发器和函数操作数据库，保证数据安全与一致性。
 - 本项目主要聚焦于数据库设计、用户界面交互设计以及系统基本功能（用户登录、信息查询、增删改等）。
 - **注意**：本项目为课程项目，不涉及网络平台公网部署与多用户高并发技术实现，这部分不属于本课程重点，固相应功能并未实现。
+**更多系统设计细节参考/Documentation目录下的两个说明文档**
 
 ## 三、系统结构与模块说明
 
@@ -84,8 +85,8 @@ pip install -r requirements.txt
 </p>
 
 
-4. **在源代码 `app.py` 中填写数据库信息**  
-   - 打开 `app.py` 文件。
+4. **在源代码 `flask_app/db_utils.py` 中填写数据库信息**  
+   - 打开 `flask_app/db_utils.py` 文件。
    - 填入你的数据库服务器名、数据库名（固定为 `ScoreManagement`），以及刚刚设置的用户名和密码。
 <p align="center">
   <span style="font-size:10px; font-weight:normal;">连接数据库</span><br>
@@ -103,3 +104,8 @@ python app.py
   <span style="font-size:10px; font-weight:normal;">运行系统</span><br>
   <img src="README_pics/pic6.png" alt="导入数据库" width="70%"/>
 </p>
+
+## 注
+本仓库为厦门大学信息学院本科生课程“数据库数据系统原理”的课程项目。
+项目主要聚焦于数据库的学习，因此一些设计的网页功能并未实现，仅作参考。
+同时，为了迎合课程实验课的所使用数据库系统，本项目沿用了SQL Server作为数据库，其配置和使用上没有MySQL简便，敬请谅解。
