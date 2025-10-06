@@ -1,5 +1,5 @@
 # 学生成绩管理系统
-
+> [click here to see README in English](./README_eng.md)。
 ## 一、系统设计需求
 
 本学生成绩管理系统主要为学生成绩的查询与维护提供便捷，打造一个方便管理和信息查阅的网络平台。  
